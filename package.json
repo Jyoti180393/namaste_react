@@ -1,0 +1,25 @@
+{
+  "name": "namaste_react",
+  "version": "1.0.0",
+  "description": "This is custom made npm by Jyoti",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/Jyoti180393/namaste_react.git)"
+  },
+  "keywords": [
+    "react",
+    "namaste-react"
+  ],
+  "author": "Jyoti",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.1"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
