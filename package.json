@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "This is custom made npm by Jyoti",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "run": "parcel index.html --open"
   },
   "repository": {
     "type": "git",
