@@ -9,6 +9,16 @@ const Restaurant = () => {
   const { resId } = useParams();
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   const [restaurantMenu, setRestaurantMenu] = useState(null);
+  const [closedIndexes, setClosedIndexes] = useState([]);
+
+  const toggleAccordion = (index) => {
+    setClosedIndexes(
+      (prev) =>
+        prev.includes(index)
+          ? prev.filter((i) => i !== index) // open it
+          : [...prev, index] // close it
+    );
+  };
   // console.log(resId);
 
   useEffect(() => {
@@ -69,12 +79,20 @@ const Restaurant = () => {
       <div className="menu-group">
         {/* <!-- Section Header --> */}
         {restaurantMenu?.slice(1).map((restInfo, index) => {
+          const isOpen = !closedIndexes.includes(index);
           return (
             <div className="menu-section" key={index}>
-              <h3 className="title">{restInfo?.card?.card?.title}</h3>
-              {restInfo?.card?.card?.itemCards?.map((item) => (
-                <MenuCard key={item.card.info.id} item={item} />
-              ))}
+              <div
+                className="menu-header"
+                onClick={() => toggleAccordion(index)}
+              >
+                <h3 className="title">{restInfo?.card?.card?.title}</h3>
+                <span>{isOpen ? "▲" : "▼"}</span>
+              </div>
+              {isOpen &&
+                restInfo?.card?.card?.itemCards?.map((item) => (
+                  <MenuCard key={item.card.info.id} item={item} />
+                ))}
             </div>
           );
         })}

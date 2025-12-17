@@ -142,3 +142,11 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 16px 0;
+}
