@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
 // import resObj from "../utils/mockData";
 import { useState, useEffect } from "react";
-import { FETCH_MENU_URL } from "../utils/constants";
-import Shimmer from "./shimmer";
+import { FETCH_RESTAURANTS_LIST } from "../utils/constants";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -16,16 +17,19 @@ const Body = () => {
   // console.log("Body Rendered");
 
   const fetchData = async () => {
-    const data = await fetch(FETCH_MENU_URL);
+    const data = await fetch(FETCH_RESTAURANTS_LIST);
     const json = await data.json();
-    // console.log(
-    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    // );
+    console.log(
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
     setListOfRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
     setFilteredRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
   };
 
@@ -86,7 +90,12 @@ const Body = () => {
 
       <div className="restaurant-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+          <Link
+            to={"/restaurant/" + restaurant?.info?.id}
+            key={restaurant?.info?.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

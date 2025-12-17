@@ -1,0 +1,144 @@
+.restaurant-menu-container {
+  display: flex;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  flex-flow: column;
+
+}
+
+.restaurant-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.restaurant-card h1 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.rating-row {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.rating {
+  color: green;
+  font-weight: bold;
+}
+
+.tags {
+  color: #ff5722;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.info {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  gap: 15px;
+}
+
+
+/* Menu component */
+
+ .title {
+  font-size: 16px;
+}
+.menu-section {
+  display: flex;
+  flex-flow: column;
+  margin: 20px;
+  border-bottom: 16px solid rgba(2, 6, 12, .0509803922);
+
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+}
+
+/* Left Content */
+.item-left {
+  width: 70%;
+}
+
+.badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.veg-icon {
+  width: 14px;
+  height: 14px;
+  border: 2px solid green;
+}
+
+.bestseller {
+  color: #ff5722;
+  font-size: 12px;
+}
+
+.item-left h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* Price */
+.price {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.new-price {
+  font-weight: bold;
+}
+
+
+/* Description */
+.desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+}
+
+
+
+/* Right Content */
+.item-right {
+  width: 130px;
+  text-align: center;
+  position: relative;
+}
+
+.item-right img {
+  width: 130px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ADD Button */
+.add-btn {
+  padding: 6px 20px;
+  border: 1px solid green;
+  color: green;
+  background: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
