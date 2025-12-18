@@ -78,3 +78,9 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.user-container{
+  margin: 10px;
+  padding: 20px;
+  border: 16px solid rgba(2, 6, 12, .0509803922);
+}
