@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { FETCH_RESTAURANTS_LIST } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const isOnline = useOnlineStatus();
 
   // console.log(listOfRestaurant);
   useEffect(() => {
@@ -33,10 +35,9 @@ const Body = () => {
     );
   };
 
-  //Conditional Rendering
-  // if (listOfRestaurant.length === 0) {
-  //   return <Shimmer />;
-  // }
+  if (!isOnline) {
+    return <h1>Looks like you are offline! Please check your internet</h1>;
+  }
 
   return listOfRestaurant.length === 0 ? (
     <Shimmer />

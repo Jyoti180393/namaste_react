@@ -4,11 +4,15 @@ import { FETCH_RESTAURANT_MENU } from "../utils/constants";
 import "../styles/Restaurant.css";
 import Shimmer from "./Shimmer";
 import MenuCard from "./MenuCard";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const Restaurant = () => {
   const { resId } = useParams();
-  const [restaurantInfo, setRestaurantInfo] = useState(null);
-  const [restaurantMenu, setRestaurantMenu] = useState(null);
+  const restInfo = useRestaurantMenu(resId);
+  const restaurantInfo = restInfo?.cards[2]?.card?.card?.info;
+  const restaurantMenu =
+    restInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+
   const [closedIndexes, setClosedIndexes] = useState([]);
 
   const toggleAccordion = (index) => {
@@ -19,29 +23,10 @@ const Restaurant = () => {
           : [...prev, index] // close it
     );
   };
-  // console.log(resId);
-
-  useEffect(() => {
-    //fetch the restaurant menu using the resId
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(FETCH_RESTAURANT_MENU + resId);
-    const json = await data.json();
-    // console.log(json?.data?.cards[2]?.card?.card?.info);
-    setRestaurantInfo(json?.data?.cards[2]?.card?.card?.info);
-
-    setRestaurantMenu(
-      json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-    );
-  };
 
   if (!restaurantInfo) {
     return <Shimmer />;
   }
-  // console.log(restaurantInfo);
-  // console.log(restaurantMenu);
 
   const {
     name,
@@ -77,7 +62,6 @@ const Restaurant = () => {
       </div>
 
       <div className="menu-group">
-        {/* <!-- Section Header --> */}
         {restaurantMenu?.slice(1).map((restInfo, index) => {
           const isOpen = !closedIndexes.includes(index);
           return (
@@ -97,17 +81,6 @@ const Restaurant = () => {
           );
         })}
       </div>
-      {/* <div className="menu-section">
-        {restaurantMenu[2]?.card?.card?.itemCards.map((item) => (
-          <MenuCard key={item.card.info.id} item={item} />
-        ))}
-      </div> */}
-      {/* <div className="menu-section">
-        <h3>{restaurantMenu[3]?.card?.card?.title}</h3>
-        {restaurantMenu[3]?.card?.card?.itemCards.map((item) => (
-          <MenuCard key={item.card.info.id} item={item} />
-        ))}
-      </div> */}
     </div>
   );
 };
