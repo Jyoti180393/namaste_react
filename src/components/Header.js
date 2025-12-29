@@ -9,12 +9,12 @@ const Header = () => {
   // console.log("Link", <Link />);
 
   return (
-    <div className="header">
+    <div className="flex justify-between shadow-lg bg-orange-100 m-5 p-5 ">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL}></img>
+        <img className="w-45" src={LOGO_URL}></img>
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex p-10 justify-between  align-end list-none *:ml-10  text-lg  ">
           <li>Online Status: {isOnline ? "✅" : "🛑"}</li>
           <li>
             <Link to="/">Home</Link>
