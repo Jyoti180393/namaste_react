@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withVegOnly } from "./RestaurantCard";
 // import resObj from "../utils/mockData";
 import { useState, useEffect } from "react";
 import { FETCH_RESTAURANTS_LIST } from "../utils/constants";
@@ -13,10 +13,13 @@ const Body = () => {
   const isOnline = useOnlineStatus();
 
   // console.log(listOfRestaurant);
+
   useEffect(() => {
     fetchData();
   }, []);
   // console.log("Body Rendered");
+
+  const VegOnlyRestaurantCard = withVegOnly(RestaurantCard);
 
   const fetchData = async () => {
     const data = await fetch(FETCH_RESTAURANTS_LIST);
@@ -95,7 +98,11 @@ const Body = () => {
             to={"/restaurant/" + restaurant?.info?.id}
             key={restaurant?.info?.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.veg ? (
+              <VegOnlyRestaurantCard resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

@@ -1,6 +1,6 @@
 
 @import "tailwindcss";
-/* 
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -86,4 +86,4 @@
   margin: 10px;
   padding: 20px;
   border: 16px solid rgba(2, 6, 12, .0509803922);
-} */
+} 

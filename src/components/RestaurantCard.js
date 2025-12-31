@@ -31,3 +31,19 @@ const RestaurantCard = (props) => {
 };
 
 export default RestaurantCard;
+
+// only veg restaurant HOC
+
+export const withVegOnly = (RestaurantCard) => {
+  // return component that shows only veg restaurant
+  return (props) => (
+    // return JSX for veg restaurant label
+    <div>
+      <label className="absolute bg-green-500 text-white p-1 m-2 rounded-md">
+        Veg only
+      </label>
+      <RestaurantCard {...props} />
+      {/* // propagate all props to RestaurantCard */}
+    </div>
+  );
+};

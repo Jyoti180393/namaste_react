@@ -13,6 +13,8 @@ const Restaurant = () => {
   const restaurantMenu =
     restInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
+  console.log("restaurantMenu", restaurantMenu);
+
   const [closedIndexes, setClosedIndexes] = useState([]);
 
   const toggleAccordion = (index) => {
