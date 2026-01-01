@@ -1,7 +1,5 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
-import { FETCH_RESTAURANT_MENU } from "../utils/constants";
-import "../styles/Restaurant.css";
+import { useState } from "react";
 import Shimmer from "./Shimmer";
 import MenuCard from "./MenuCard";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
@@ -11,7 +9,7 @@ const Restaurant = () => {
   const restInfo = useRestaurantMenu(resId);
   const restaurantInfo = restInfo?.cards[2]?.card?.card?.info;
   const restaurantMenu =
-    restInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+    restInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.slice(1);
 
   console.log("restaurantMenu", restaurantMenu);
 
@@ -42,20 +40,22 @@ const Restaurant = () => {
   } = restaurantInfo;
 
   return (
-    <div className="restaurant-menu-container">
-      <div className="restaurant-card">
-        <h1>{name}</h1>
+    <div className="flex justify-center font-sans flex-col items-center">
+      <div className="p-8 border-rounded-lg">
+        <h1 className="m-b8 text-2xl font-bold">{name}</h1>
 
-        <div className="rating-row">
-          <span className="rating">⭐ {avgRating}</span>
-          <span className="meta">
+        <div className="mb-2 text-lg">
+          <span className=" text-green-700 font-bold">⭐ {avgRating}</span>
+          <span className="font-medium mx-2">
             ({totalRatingsString}) • {costForTwoMessage}
           </span>
         </div>
 
-        <div className="tags">{cuisines.join(", ")}</div>
+        <div className="text-red-600 text-lg mb-2 font-medium]">
+          {cuisines.join(", ")}
+        </div>
 
-        <div className="info">
+        <div className="text-lg text-gray-600 flex gap-4">
           <span>
             📍 {areaName} / {locality}
           </span>
@@ -63,17 +63,22 @@ const Restaurant = () => {
         </div>
       </div>
 
-      <div className="menu-group">
-        {restaurantMenu?.slice(1).map((restInfo, index) => {
-          const isOpen = !closedIndexes.includes(index);
+      <div className="w-3/5 mb-8">
+        {restaurantMenu?.map((restInfo, index) => {
+          const isOpen = closedIndexes.includes(index);
           return (
-            <div className="menu-section" key={index}>
+            <div
+              className="flex flex-col m-5 border-b-16 border-gray-200 "
+              key={index}
+            >
               <div
-                className="menu-header"
+                className="flex justify-between cursor-pointer py-3.5"
                 onClick={() => toggleAccordion(index)}
               >
-                <h3 className="title">{restInfo?.card?.card?.title}</h3>
-                <span>{isOpen ? "▲" : "▼"}</span>
+                <h3 className="font-bold text-xl">
+                  {restInfo?.card?.card?.title}
+                </h3>
+                <span>{isOpen ? "👆" : "👇"}</span>
               </div>
               {isOpen &&
                 restInfo?.card?.card?.itemCards?.map((item) => (
