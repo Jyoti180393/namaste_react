@@ -1,7 +1,7 @@
 import { CDN_URL } from "../utils/constants";
 
 const MenuCard = ({ item }) => {
-  // console.log(item);
+  // Controlled Component
   const { name, imageId, price, description } = item?.card?.info;
   return (
     <div className="flex justify-between menu-item relative py-4 border-b border-gray-200">

@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
-import MenuCard from "./MenuCard";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import MenuHeader from "./MenuHeader";
 
 const Restaurant = () => {
   const { resId } = useParams();
@@ -11,18 +11,7 @@ const Restaurant = () => {
   const restaurantMenu =
     restInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.slice(1);
 
-  console.log("restaurantMenu", restaurantMenu);
-
-  const [closedIndexes, setClosedIndexes] = useState([]);
-
-  const toggleAccordion = (index) => {
-    setClosedIndexes(
-      (prev) =>
-        prev.includes(index)
-          ? prev.filter((i) => i !== index) // open it
-          : [...prev, index] // close it
-    );
-  };
+  const [showSectionIndex, setShowSectionIndex] = useState(0);
 
   if (!restaurantInfo) {
     return <Shimmer />;
@@ -65,25 +54,16 @@ const Restaurant = () => {
 
       <div className="w-3/5 mb-8">
         {restaurantMenu?.map((restInfo, index) => {
-          const isOpen = closedIndexes.includes(index);
           return (
             <div
               className="flex flex-col m-5 border-b-16 border-gray-200 "
               key={index}
             >
-              <div
-                className="flex justify-between cursor-pointer py-3.5"
-                onClick={() => toggleAccordion(index)}
-              >
-                <h3 className="font-bold text-xl">
-                  {restInfo?.card?.card?.title}
-                </h3>
-                <span>{isOpen ? "👆" : "👇"}</span>
-              </div>
-              {isOpen &&
-                restInfo?.card?.card?.itemCards?.map((item) => (
-                  <MenuCard key={item.card.info.id} item={item} />
-                ))}
+              <MenuHeader
+                item={restInfo}
+                showIndex={index === showSectionIndex ? true : false}
+                setShowSectionIndex={() => setShowSectionIndex(index)}
+              />
             </div>
           );
         })}
