@@ -1,5 +1,6 @@
 import UserClass from "./UserClass";
 import { Component } from "react";
+import UserContext from "../utils/UserContext";
 
 class About extends Component {
   constructor() {
@@ -7,7 +8,7 @@ class About extends Component {
     this.state = {
       userInfo: [{}],
     };
-    console.log("About Constructor");
+    // console.log("About Constructor");
   }
 
   async componentDidMount() {
@@ -26,26 +27,36 @@ class About extends Component {
 
   componentWillUnmount() {
     // clearInterval(this.timer);
-    console.log("About componentWillUnmount");
+    // console.log("About componentWillUnmount");
   }
 
   componentDidUpdate() {
-    console.log("About componentDidUpdate");
+    // console.log("About componentDidUpdate");
   }
   render() {
-    console.log("About render");
+    // console.log("About render", this.state.userInfo);
 
     return (
       <div>
-        <h1>About US</h1>
+        <h1 className="text-3xl font-bold">About US</h1>
         <h2>This is Namaste React Learning App</h2>
+        <div className="flex flex-row gap-2.5 font-bold">
+          Developed By
+          <UserContext.Consumer>
+            {({ userLogged }) => (
+              <h3 className="text-purple-500 text-lg">{userLogged}</h3>
+            )}
+          </UserContext.Consumer>
+        </div>
+
+        <h3>Our Team Members:</h3>
         <UserClass
-          name="Jyoti"
+          name="Jhon"
           location="Pithoragarh"
           userInfo={this.state?.userInfo[0]}
         />
         <UserClass
-          name="Divya"
+          name="Dave"
           location="Lucknow"
           userInfo={this.state?.userInfo[1]}
         />

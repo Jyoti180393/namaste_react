@@ -4,7 +4,7 @@ class UserClass extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props.name + " constructor");
+    // console.log(props.name + " constructor");
 
     this.state = {
       count: 0,
@@ -13,19 +13,19 @@ class UserClass extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.name + " componentDidMount");
+    // console.log(this.props.name + " componentDidMount");
   }
 
   componentWillUnmount() {
-    console.log(this.props.name + " componentWillUnmount");
+    // console.log(this.props.name + " componentWillUnmount");
   }
 
   componentDidUpdate() {
-    console.log(this.props.name + " componentDidUpdate");
+    // console.log(this.props.name + " componentDidUpdate");
   }
 
   render() {
-    console.log(this.props.name + " render");
+    // console.log(this.props.name + " render");
 
     const { name, location, userInfo } = this.props;
     const { count, count2 } = this.state;
