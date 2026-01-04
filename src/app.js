@@ -7,16 +7,20 @@ import Error from "./components/Error";
 import Restaurant from "./components/Restaurant";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import { lazy, Suspense, useState } from "react";
+import UserContext from "./utils/UserContext";
 
 // const [userName, setUserName] = useState("default");
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("default");
   return (
-    <div id="app-layout" className="app">
-      {<Header />}
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ userLogged: userName, setUserName }}>
+      <div id="app-layout" className="app">
+        {<Header />}
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

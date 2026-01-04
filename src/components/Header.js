@@ -9,8 +9,17 @@ const Header = () => {
   const isOnline = useOnlineStatus();
   // console.log("Link", <Link />);
 
-  const { userLogged } = useContext(UserContext);
+  const { userLogged, setUserName } = useContext(UserContext);
   console.log("User Context", userLogged);
+  const handleLogin = () => {
+    if (loginBtn === "Login") {
+      setLoginBtn("Logout");
+      setUserName("JP");
+    } else {
+      setLoginBtn("Login");
+      setUserName("default");
+    }
+  };
 
   return (
     <div className="flex justify-between shadow-lg bg-orange-100 m-5 p-5 ">
@@ -29,22 +38,16 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
+          <li>Cart</li>
+          <li>
+            <button className="login" onClick={() => handleLogin()}>
+              {loginBtn}
+            </button>
+          </li>
           <li>
             <p className="border p-2 rounded-full bg-blue-600 text-white">
               {userLogged}
             </p>
-          </li>
-          <li>
-            <button
-              className="login"
-              onClick={() => {
-                loginBtn === "Login"
-                  ? setLoginBtn("Logout")
-                  : setLoginBtn("Login");
-              }}
-            >
-              {loginBtn}
-            </button>
           </li>
         </ul>
       </div>
