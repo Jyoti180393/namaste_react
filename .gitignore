@@ -4,5 +4,5 @@ node_modules/
 .parcel-cache/
 # Build output
 dist/
-
-
+# Coverage reports
+coverage/
