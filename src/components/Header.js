@@ -1,9 +1,10 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
+
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
-import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
@@ -15,15 +16,16 @@ const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
   // console.log("Cart Items", cartItems);
 
-  const { userLogged, setUserName } = useContext(UserContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
   // console.log("User Context", userLogged);
+
   const handleLogin = () => {
     if (loginBtn === "Login") {
       setLoginBtn("Logout");
-      setUserName("JP");
+      setUserLogged("JP");
     } else {
       setLoginBtn("Login");
-      setUserName("default");
+      setUserLogged("Guest");
     }
   };
 
@@ -46,7 +48,10 @@ const Header = () => {
           </li>
           <li className="flex">
             <Link to="/cart">
-              <p className="bg-green-400 text-white font-bold w-fit h-fit text-center p-1 leading-normal">
+              <p
+                data-testid="cart-count"
+                className="bg-green-400 text-white font-bold w-fit h-fit text-center p-1 leading-normal"
+              >
                 {cartItems.length}
               </p>
               🛒

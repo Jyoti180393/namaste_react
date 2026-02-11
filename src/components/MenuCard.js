@@ -12,7 +12,10 @@ const MenuCard = ({ item }) => {
     dispatch(addItems(item));
   };
   return (
-    <div className="flex justify-between menu-item relative py-4 border-b border-gray-200">
+    <div
+      data-testid="menuItem"
+      className="flex justify-between menu-item relative py-4 border-b border-gray-200"
+    >
       <div className="w-full pr-4">
         <div className="flex items-center gap-2 mb-1">
           <span className="w-4 h-4 bg-green-500 rounded-full"></span>
@@ -37,6 +40,7 @@ const MenuCard = ({ item }) => {
           alt="Food"
         />
         <button
+          data-testid="addBtn"
           className="relative bottom-7 left-10 border border-gray-300 font-bold bg-white
          text-green-700 px-4 py-1 rounded-lg"
           onClick={() => handleAddItem(item)}

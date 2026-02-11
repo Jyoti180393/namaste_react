@@ -28,21 +28,22 @@ const Body = () => {
     //   json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
     //     ?.restaurants
     // );
-    setListOfRestaurant(
+    const restaurants =
       json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+        ?.restaurants ||
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+      [];
+
+    setListOfRestaurant(restaurants);
+    setFilteredRestaurant(restaurants);
   };
 
   if (!isOnline) {
     return <h1>Looks like you are offline! Please check your internet</h1>;
   }
 
-  return listOfRestaurant.length === 0 ? (
+  return listOfRestaurant?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -50,6 +51,7 @@ const Body = () => {
         <div className="search">
           <input
             type="text"
+            data-testid="searchBox"
             id="search-box"
             className="search-box"
             value={searchText}
@@ -58,10 +60,11 @@ const Body = () => {
             }}
           />
           <button
+            data-testid="searchBtn"
             className="search-btn"
             onClick={() => {
-              const filteredRestaurants = listOfRestaurant.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              const filteredRestaurants = listOfRestaurant?.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase()),
               );
               setFilteredRestaurant(filteredRestaurants);
             }}
@@ -70,10 +73,11 @@ const Body = () => {
           </button>
         </div>
         <button
+          data-testid="filterBtn"
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurant.filter(
-              (res) => res.info.avgRating > 4.2
+              (res) => res.info.avgRating > 4.2,
             );
             // console.log("button clicked", filteredList);
             setFilteredRestaurant(filteredList);
@@ -93,7 +97,7 @@ const Body = () => {
       </div>
 
       <div className="restaurant-container">
-        {filteredRestaurant.map((restaurant) => (
+        {filteredRestaurant?.map((restaurant) => (
           <Link
             to={"/restaurant/" + restaurant?.info?.id}
             key={restaurant?.info?.id}
